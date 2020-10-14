@@ -1,5 +1,5 @@
-CREATE SCHEMA CORPO_APP_DB;
-set search_path TO CORPO_APP_DB;
+CREATE SCHEMA corpo_event_db;
+set search_path TO corpo_event_db;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS citext;
