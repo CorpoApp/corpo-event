@@ -24,3 +24,5 @@ CREATE TABLE registered(
     date DATE,
     PRIMARY KEY(event_id, mail)
 );
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA corpo_event_db TO postgres;
