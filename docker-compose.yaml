@@ -13,13 +13,11 @@ services:
       - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgres-data:/var/lib/postgresql/corpo-event/data
   quarkus:
-    image: maven
-    volumes:
-      - "./:/app"
+    build:
+      context: .
+      dockerfile: ./src/main/docker/Dockerfile.jvm
     ports:
       - 8080:8080
-    working_dir: /app
-    command: "mvn quarkus:dev"
 
 volumes:
   postgres-data:
