@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ feature/github_CI ]
+    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
