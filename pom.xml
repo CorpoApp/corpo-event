@@ -128,4 +128,11 @@
       </properties>
     </profile>
   </profiles>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub for corpo app</name>
+      <url>https://maven.pkg.github.com/CorpoApp</url>
+    </repository>
+  </distributionManagement>
 </project>
