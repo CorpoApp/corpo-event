@@ -14,6 +14,19 @@ services:
       - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
       - corpo-app_postgres-data:/var/lib/postgresql/corpo-event/data
 
+  liquibase:
+    image: webdevops/liquibase:postgres
+    command: update
+    volumes:
+      - .:/liquibase
+    environment:
+      - LIQUIBASE_CHANGELOG=./liquibase/changelog/changelog.xml
+      - LIQUIBASE_URL=jdbc:postgresql://postgres:5432/corpoapp
+      - LIQUIBASE_USERNAME=corpoapp
+      - LIQUIBASE_PASSWORD=corpoapp
+    depends_on:
+      - corpo-app_postgres
+
   corpo-app_quarkus:
     build:
       context: .
@@ -21,7 +34,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - corpo-app_postgres
+      - liquibase
 
 volumes:
   corpo-app_postgres-data:
