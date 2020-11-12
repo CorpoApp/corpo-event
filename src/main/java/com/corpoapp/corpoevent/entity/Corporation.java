@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "corporation")
@@ -21,7 +19,5 @@ public class Corporation extends PanacheEntity {
     @Column(unique = true)
     public String name;
     public String sport;
-    @ManyToMany
-    public List<User> userList;
 }
 

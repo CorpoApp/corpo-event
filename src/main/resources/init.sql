@@ -30,13 +30,3 @@ CREATE TABLE corporation(
     name VARCHAR(80) UNIQUE,
 	sport VARCHAR(80)
 );
-
-CREATE TABLE corporation_users(
-  corporation_id uuid NOT NULL,
-  corpo_user_id uuid NOT NULL,
-  PRIMARY KEY (corporation_id,corpo_user_id),
-  CONSTRAINT corporation_users_ibfk_1
-   FOREIGN KEY (corporation_id) REFERENCES corporation (id),
-  CONSTRAINT corporation_users_ibfk_2
-   FOREIGN KEY (corpo_user_id) REFERENCES corpo_user (id)
-);
