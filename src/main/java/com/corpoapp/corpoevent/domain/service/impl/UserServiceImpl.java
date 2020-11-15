@@ -1,9 +1,9 @@
-package com.corpoapp.corpoevent.service.impl;
+package com.corpoapp.corpoevent.domain.service.impl;
 
-import com.corpoapp.corpoevent.dto.UserDTO;
-import com.corpoapp.corpoevent.entity.User;
-import com.corpoapp.corpoevent.exceptions.mapper.UserException;
-import com.corpoapp.corpoevent.service.UserService;
+import com.corpoapp.corpoevent.api.dto.UserDTO;
+import com.corpoapp.corpoevent.api.mapper.exception.UserException;
+import com.corpoapp.corpoevent.domain.entity.User;
+import com.corpoapp.corpoevent.domain.service.UserService;
 import org.modelmapper.ModelMapper;
 
 import javax.enterprise.context.ApplicationScoped;

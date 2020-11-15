@@ -1,4 +1,4 @@
-package com.corpoapp.corpoevent.dto;
+package com.corpoapp.corpoevent.api.dto;
 
 import lombok.Data;
 

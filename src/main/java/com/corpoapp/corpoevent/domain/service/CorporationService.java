@@ -1,7 +1,7 @@
-package com.corpoapp.corpoevent.service;
+package com.corpoapp.corpoevent.domain.service;
 
-import com.corpoapp.corpoevent.dto.CorporationDTO;
-import com.corpoapp.corpoevent.exceptions.mapper.UserException;
+import com.corpoapp.corpoevent.api.dto.CorporationDTO;
+import com.corpoapp.corpoevent.api.mapper.exception.UserException;
 
 import java.util.List;
 

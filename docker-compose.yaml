@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     hostname: postgres
     volumes:
-      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./src/App/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
       - corpo-app_postgres-data:/var/lib/postgresql/corpo-event/data
 
   corpo-app_quarkus:

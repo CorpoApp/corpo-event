@@ -1,4 +1,4 @@
-package com.corpoapp.corpoevent.entity;
+package com.corpoapp.corpoevent.domain.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;

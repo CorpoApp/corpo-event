@@ -1,4 +1,4 @@
-package com.corpoapp.corpoevent.exceptions.mapper;
+package com.corpoapp.corpoevent.api.mapper.exception;
 
 public class UserException extends Exception {
 

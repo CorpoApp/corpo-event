@@ -1,4 +1,4 @@
-package com.corpoapp.corpoevent.exceptions.mapper;
+package com.corpoapp.corpoevent.api.mapper.exception;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

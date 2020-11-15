@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.fast-jar -t quarkus/corpo-app-fast-jar .
+# docker build -f src/App/docker/Dockerfile.fast-jar -t quarkus/corpo-app-fast-jar .
 #
 # Then run the container using:
 #

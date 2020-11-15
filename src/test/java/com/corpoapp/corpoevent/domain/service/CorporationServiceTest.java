@@ -1,9 +1,9 @@
-package com.corpoapp.corpoevent.service;
+package com.corpoapp.corpoevent.domain.service;
 
-import com.corpoapp.corpoevent.dto.CorporationDTO;
-import com.corpoapp.corpoevent.entity.Corporation;
-import com.corpoapp.corpoevent.entity.User;
-import com.corpoapp.corpoevent.exceptions.mapper.UserException;
+import com.corpoapp.corpoevent.api.dto.CorporationDTO;
+import com.corpoapp.corpoevent.api.mapper.exception.UserException;
+import com.corpoapp.corpoevent.domain.entity.Corporation;
+import com.corpoapp.corpoevent.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
-package com.corpoapp.corpoevent.api;
+package com.corpoapp.corpoevent.api.resource;
 
-import com.corpoapp.corpoevent.dto.CorporationDTO;
-import com.corpoapp.corpoevent.service.CorporationService;
+import com.corpoapp.corpoevent.api.dto.CorporationDTO;
+import com.corpoapp.corpoevent.domain.service.CorporationService;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import javax.enterprise.context.ApplicationScoped;
