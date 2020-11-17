@@ -26,7 +26,7 @@ public class UserServiceTest {
     }
 
 
-    private String USER_MAIL = "test@decathlon.com";
+    private String USER_MAIL = "test@localhost.com";
 
     @Test
     public void testSignUp() throws UserException {

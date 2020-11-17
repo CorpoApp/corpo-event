@@ -56,8 +56,8 @@ public class CorporationServiceTest {
     @Test
     public void testRegister() throws UserException {
         corporationService.create("test", "boules");
-        userService.signUp("test@decathlon.com", "testUser");
-        corporationService.register("test", "test@decathlon.com");
+        userService.signUp("test@localhost.com", "testUser");
+        corporationService.register("test", "test@localhost.com");
 
         CorporationDTO result = corporationService.getAll().get(0);
         Assert.assertFalse(result.getUserList().isEmpty());
