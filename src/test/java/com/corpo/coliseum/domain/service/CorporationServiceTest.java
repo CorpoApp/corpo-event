@@ -1,9 +1,9 @@
 package com.corpo.coliseum.domain.service;
 
-import com.corpo.coliseum.domain.entity.Corporation;
-import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.api.dto.CorporationDTO;
 import com.corpo.coliseum.api.mapper.exception.UserException;
+import com.corpo.coliseum.domain.entity.Corporation;
+import com.corpo.coliseum.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
