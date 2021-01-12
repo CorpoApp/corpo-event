@@ -1,5 +1,6 @@
 package com.corpo.coliseum.domain.service.impl;
 
+import com.corpo.coliseum.api.resource.input.CorporationInput;
 import com.corpo.coliseum.domain.service.CorporationService;
 import com.corpo.coliseum.domain.service.UserService;
 import com.corpo.coliseum.api.dto.CorporationDTO;
@@ -30,10 +31,10 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Override
     @Transactional
-    public void create(String name, String sport) {
+    public void create(CorporationInput corporationInput) {
         Corporation.builder()
-                .name(name)
-                .sport(sport)
+                .name(corporationInput.name)
+                .sport(corporationInput.sport)
                 .build()
                 .persist();
     }

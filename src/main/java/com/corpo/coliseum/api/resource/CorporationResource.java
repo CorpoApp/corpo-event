@@ -1,11 +1,14 @@
 package com.corpo.coliseum.api.resource;
 
+import com.corpo.coliseum.api.resource.input.CorporationInput;
 import com.corpo.coliseum.domain.service.CorporationService;
 import com.corpo.coliseum.api.dto.CorporationDTO;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,8 +33,8 @@ public class CorporationResource {
     }
 
     @POST
-    public Response create(@QueryParam String name, @QueryParam String sport) {
-        corporationService.create(name, sport);
+    public Response create(@Valid CorporationInput corporationInput) {
+        corporationService.create(corporationInput);
         return Response.status(201).build();
     }
 }

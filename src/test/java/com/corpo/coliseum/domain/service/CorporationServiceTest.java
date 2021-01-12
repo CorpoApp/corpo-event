@@ -2,6 +2,7 @@ package com.corpo.coliseum.domain.service;
 
 import com.corpo.coliseum.api.dto.CorporationDTO;
 import com.corpo.coliseum.api.mapper.exception.UserException;
+import com.corpo.coliseum.api.resource.input.CorporationInput;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.entity.User;
 import io.quarkus.test.junit.QuarkusTest;
@@ -33,21 +34,21 @@ public class CorporationServiceTest {
     @Test
     public void testGetAll(){
         Assert.assertTrue(corporationService.getAll().isEmpty());
-        corporationService.create("test", "boules");
-        corporationService.create("test2", "boules2");
+        corporationService.create(new CorporationInput("test", "boules"));
+        corporationService.create(new CorporationInput("test2", "boules2"));
         Assert.assertTrue(corporationService.getAll().size() == 2);
     }
 
     @Test
     public void testCreate(){
         Assert.assertTrue(corporationService.getAll().isEmpty());
-        corporationService.create("test", "boules");
+        corporationService.create(new CorporationInput("test", "boules"));
         Assert.assertTrue(corporationService.getAll().size() == 1);
     }
 
     @Test
     public void testDelete(){
-        corporationService.create("test", "boules");
+        corporationService.create(new CorporationInput("test", "boules"));
         Assert.assertFalse(corporationService.getAll().isEmpty());
         corporationService.remove("test", "boules");
         Assert.assertTrue(corporationService.getAll().isEmpty());
@@ -55,7 +56,7 @@ public class CorporationServiceTest {
 
     @Test
     public void testRegister() throws UserException {
-        corporationService.create("test", "boules");
+        corporationService.create(new CorporationInput("test", "boules"));
         userService.signUp("test@localhost.com", "testUser");
         corporationService.register("test", "test@localhost.com");
 
