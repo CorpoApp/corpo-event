@@ -10,6 +10,6 @@ public interface CorporationService {
 
     List<CorporationDTO> getAll();
     void create(CorporationInput corporationInput);
-    void remove(String name, String sport);
+    void remove(CorporationInput corporationInput);
     void register(String name, String mail) throws UserException;
 }

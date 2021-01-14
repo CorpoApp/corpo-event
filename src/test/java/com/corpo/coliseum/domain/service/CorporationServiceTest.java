@@ -50,7 +50,7 @@ public class CorporationServiceTest {
     public void testDelete(){
         corporationService.create(new CorporationInput("test", "boules"));
         Assert.assertFalse(corporationService.getAll().isEmpty());
-        corporationService.remove("test", "boules");
+        corporationService.remove(new CorporationInput("test", "boules"));
         Assert.assertTrue(corporationService.getAll().isEmpty());
     }
 

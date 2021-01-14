@@ -41,8 +41,8 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Override
     @Transactional
-    public void remove(String name, String sport) {
-        Corporation.delete("name = ?1 and sport = ?2", name, sport);
+    public void remove(CorporationInput corporationInput) {
+        Corporation.delete("name = ?1 and sport = ?2", corporationInput.name, corporationInput.sport);
     }
 
     @Override
