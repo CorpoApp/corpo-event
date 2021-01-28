@@ -1,8 +1,10 @@
+-- Create TABLES
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE event(
-	id uuid PRIMARY KEY NOT NULL,
+	id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
 	name VARCHAR(255),
 	description CITEXT,
 	user_slots INTEGER,
@@ -13,20 +15,20 @@ CREATE TABLE event(
 );
 
 CREATE TABLE corpo_user(
-    id uuid PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
 	mail VARCHAR(80) UNIQUE,
 	name VARCHAR(50)
 );
 
 CREATE TABLE registered(
-    event_id uuid references event NOT NULL,
+    event_id uuid references event DEFAULT uuid_generate_v4 (),
     user_id uuid references corpo_user NOT NULL,
     date TIMESTAMP,
     PRIMARY KEY(event_id, user_id)
 );
 
 CREATE TABLE corporation(
-    id uuid PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     name VARCHAR(80) UNIQUE,
 	sport VARCHAR(80)
 );
@@ -40,3 +42,18 @@ CREATE TABLE corporation_users(
   CONSTRAINT corporation_users_ibfk_2
    FOREIGN KEY (corpo_user_id) REFERENCES corpo_user (id)
 );
+
+-- Create dummy data
+
+INSERT INTO event (name, description, user_slots, remaining_slots, interval, start_date, duration)
+VALUES ('Le jeudi c''est padel !', 'Padel hebdo !', 8, 4, 20.0, '2021-02-25 18:00:00', 2.0),
+       ('Evenement spécial', 'Tournoi de la mort qui tue', 30, 0, 1.0, '2021-02-27 10:00:00', 6.0),
+       ('Tournoi de la mifa', 'Petit tournoi entre gens sympas', 12, 12, 1.0, '2021-03-03 10:00:00', 4.0);
+
+INSERT INTO corpo_user (mail, name)
+VALUES ('titi.lolilol@gprout.com', 'Tib'),
+       ('max.pgm@superman.live', 'Max'),
+       ('theo.sports@itsinthe.game', 'Théo');
+
+INSERT INTO corporation (name, sport)
+VALUES ('Décathlon Padel', 'Padel');
