@@ -1,38 +1,27 @@
 package com.corpo.coliseum.domain.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "corporation")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Corporation extends PanacheEntityBase {
+public class Corporation extends PanacheEntity {
 
-    @Id
-    public UUID id;
     @Column(unique = true)
     public String name;
     public String sport;
     @ManyToMany
-    @JoinTable(
-            name = "corporation_users",
-            joinColumns = @JoinColumn(name = "corporation_id"),
-            inverseJoinColumns = @JoinColumn(name = "corpo_user_id")
-    )
     public List<User> userList;
 }
 
