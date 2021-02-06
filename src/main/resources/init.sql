@@ -43,6 +43,12 @@ CREATE TABLE corporation_users(
    FOREIGN KEY (corpo_user_id) REFERENCES corpo_user (id)
 );
 
+-- Keycloak init sql
+
+CREATE DATABASE keycloak;
+CREATE USER keycloak WITH PASSWORD '8u8]?gDu(.S5U_Ky';
+GRANT ALL PRIVILEGES ON DATABASE keycloak TO keycloak;
+
 -- Create dummy data
 
 INSERT INTO event (name, description, user_slots, remaining_slots, interval, start_date, duration)
