@@ -1,4 +1,4 @@
-Feature: find postal code
+Feature: corporation
 
   Background:
     * url baseUrl
