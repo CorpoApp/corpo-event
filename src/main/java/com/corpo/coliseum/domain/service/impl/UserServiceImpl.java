@@ -1,5 +1,6 @@
 package com.corpo.coliseum.domain.service.impl;
 
+import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import com.corpo.coliseum.domain.service.UserService;
 import com.corpo.coliseum.api.dto.UserDTO;
 import com.corpo.coliseum.api.mapper.exception.UserException;
@@ -13,38 +14,19 @@ import javax.transaction.Transactional;
 @ApplicationScoped
 public class UserServiceImpl implements UserService {
 
-    @Inject
-    ModelMapper modelMapper;
-
     @Override
     @Transactional
-    public void signUp(String mail, String name) throws UserException {
-        if(!userAlreadySignIn(mail)){
-            User.builder()
-                    .mail(mail)
-                    .name(name)
-                    .build().persist();
-        } else {
-            throw new UserException("User already registered");
-        }
+    public User signUp(User user) {
+        user.persist();
+        return user;
     }
 
     @Override
     @Transactional
-    public UserDTO findUSer(String mail) {
-        User user = User.find("mail = ?1", mail).firstResult();
-        if(user != null) {
-            return modelMapper.map(user, UserDTO.class);
-        }
-        return null;
+    public User findByMail(String mail) throws ModelNotFoundException {
+        final User user = User.findByMail(mail)
+                .orElseThrow(() -> new ModelNotFoundException("User not found !", User.class));
+        return user;
     }
 
-    @Override
-    public Boolean userAlreadySignIn(String mail) {
-        if(findUSer(mail) == null){
-            return false;
-        } else {
-            return true;
-        }
-    }
 }

@@ -12,7 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Table(name = "corpo_user")
@@ -30,5 +31,9 @@ public class User extends PanacheEntity {
             joinColumns = { @JoinColumn(name = "corpo_user_id") },
             inverseJoinColumns = { @JoinColumn(name = "corporation_id") }
     )
-    public List<Corporation> corporationList;
+    public Set<Corporation> corporationList;
+
+    public static Optional<User> findByMail(String mail) {
+        return Optional.of(find("mail", mail).firstResult());
+    }
 }

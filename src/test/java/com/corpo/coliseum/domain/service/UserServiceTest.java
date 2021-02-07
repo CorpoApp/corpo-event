@@ -1,10 +1,9 @@
 package com.corpo.coliseum.domain.service;
 
-import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.User;
+import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -26,20 +25,17 @@ public class UserServiceTest {
     }
 
 
-    private String USER_MAIL = "test@localhost.com";
+    private static final String USER_MAIL = "test@localhost.com";
+    private static final String USER_NAME = "user name";
 
     @Test
-    public void testSignUp() throws UserException {
-        Assert.assertNull(userService.findUSer(USER_MAIL));
-        userService.signUp(USER_MAIL, "test");
-        Assert.assertNotNull(userService.findUSer(USER_MAIL));
+    public void testSignUp() throws ModelNotFoundException {
+        User user = User.builder()
+                .mail(USER_MAIL)
+                .name(USER_NAME)
+                .build();
+        userService.signUp(user);
+        Assert.assertNotNull(userService.findByMail(USER_MAIL));
     }
 
-    @Test
-    public void testAlreadySignUp() throws UserException {
-        userService.signUp(USER_MAIL, "test");
-        Assertions.assertThrows(UserException.class, () -> {
-            userService.signUp(USER_MAIL, "test2");
-        });
-    }
 }

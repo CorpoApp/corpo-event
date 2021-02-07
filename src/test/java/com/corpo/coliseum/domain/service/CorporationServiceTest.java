@@ -1,66 +1,126 @@
 package com.corpo.coliseum.domain.service;
 
 import com.corpo.coliseum.domain.entity.Corporation;
-import com.corpo.coliseum.domain.entity.User;
-import com.corpo.coliseum.api.dto.CorporationDTO;
-import com.corpo.coliseum.api.mapper.exception.UserException;
+import com.corpo.coliseum.domain.exception.ModelNotFoundException;
+import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.wildfly.common.Assert;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-@Testcontainers
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @QuarkusTest
 public class CorporationServiceTest {
 
     @Inject
     CorporationService corporationService;
 
-    @Inject
-    UserService userService;
+    @Spy
+    private static final Corporation FIRST_CORPORATION = Corporation
+            .builder()
+            .name("Corporation 1")
+            .sport("Sport 1")
+            .build();
+    private static final Corporation SECOND_CORPORATION = Corporation
+            .builder()
+            .name("Corporation 2")
+            .sport("Sport 2")
+            .build();
+    private static final Corporation THIRD_CORPORATION = Corporation
+            .builder()
+            .name("Corporation 3")
+            .sport("Sport 3")
+            .build();
 
     @BeforeEach
-    @Transactional
-    public void setUp(){
-        User.deleteAll();
-        Corporation.deleteAll();
+    public void setUp() {
+        PanacheMock.mock(Corporation.class);
     }
 
     @Test
-    public void testGetAll(){
-        Assert.assertTrue(corporationService.getAll().isEmpty());
-        corporationService.create("test", "boules");
-        corporationService.create("test2", "boules2");
-        Assert.assertTrue(corporationService.getAll().size() == 2);
+    public void getAll_should_return_empty_list() {
+        //Arrange
+        Mockito.when(Corporation.listAll()).thenReturn(Collections.emptyList());
+
+        //Act
+        List<Corporation> corporations = corporationService.getAll();
+
+        //Assert
+        assertEquals(0, corporations.size());
     }
 
     @Test
-    public void testCreate(){
-        Assert.assertTrue(corporationService.getAll().isEmpty());
-        corporationService.create("test", "boules");
-        Assert.assertTrue(corporationService.getAll().size() == 1);
+    public void getAll_should_return_list() {
+        //Arrange
+        Mockito.when(Corporation.listAll())
+                .thenReturn(Arrays.asList(FIRST_CORPORATION, SECOND_CORPORATION,THIRD_CORPORATION));
+
+        //Act
+        List<Corporation> corporations = corporationService.getAll();
+
+        //Assert
+        assertEquals(3, corporations.size());
     }
 
     @Test
-    public void testDelete(){
-        corporationService.create("test", "boules");
-        Assert.assertFalse(corporationService.getAll().isEmpty());
-        corporationService.remove("test", "boules");
-        Assert.assertTrue(corporationService.getAll().isEmpty());
+    public void findByName_should_Throw_Exception() {
+        //Arrange
+        Mockito.when(Corporation.findByName("Corporation"))
+                .thenReturn(Optional.empty());
+
+        //Act / Assert
+        assertThrows(ModelNotFoundException.class,() -> corporationService.findByName("Corporation"));
+
     }
 
     @Test
-    public void testRegister() throws UserException {
-        corporationService.create("test", "boules");
-        userService.signUp("test@localhost.com", "testUser");
-        corporationService.register("test", "test@localhost.com");
+    public void findByName_should_return_First_Corporation() throws ModelNotFoundException {
+        //Arrange
+        Mockito.when(Corporation.findByName("Corporation 1"))
+                .thenReturn(Optional.of(FIRST_CORPORATION));
 
-        CorporationDTO result = corporationService.getAll().get(0);
-        Assert.assertFalse(result.getUserList().isEmpty());
-        Assert.assertTrue(result.getUserList().get(0).getName().equals("testUser"));
+        //Act
+        Corporation corporation = corporationService.findByName("Corporation 1");
+
+        //Assert
+        assertEquals(FIRST_CORPORATION, corporation);
     }
+
+    @Test
+    public void create_should_be_ok() {
+        //Arrange
+        Corporation testCorporation = Mockito.mock(Corporation.class);
+        testCorporation.name = "Corporation 1";
+        testCorporation.sport = "Sport 1";
+        Mockito.doNothing().when(testCorporation).persist();
+
+        //Act
+        Corporation corporation = corporationService.create(testCorporation);
+
+        //Assert
+        assertEquals(testCorporation, corporation);
+    }
+
+    @Test
+    public void create_with_invalid_corporation_should_fail() {
+        //Arrange
+        Corporation testCorporation = Mockito.mock(Corporation.class);
+        testCorporation.name = "Corporation 1";
+
+        //Act
+        Corporation corporation = corporationService.create(testCorporation);
+
+        //Assert
+        assertEquals(testCorporation, corporation);
+    }
+
 }
