@@ -9,6 +9,6 @@ public class CorporationDTO {
 
     private String name;
     private String sport;
-    public List<UserDTO> userList;
+    private List<UserDTO> userList;
 }
 

@@ -9,6 +9,6 @@ public class UserDTO {
 
     private String mail;
     private String name;
-    public List<CorporationDTO> corporationList;
+    private List<CorporationDTO> corporationList;
 
 }

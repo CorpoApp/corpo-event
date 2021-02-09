@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Event extends PanacheEntity implements Serializable {
 
+    private static final long serialVersionUID = 42L;
+
     public String name;
     public String description;
     @Column(name = "user_slots")

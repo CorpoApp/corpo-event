@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,7 +22,9 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends PanacheEntity {
+public class User extends PanacheEntity implements Serializable {
+
+    private static final long serialVersionUID = 42L;
 
     @Column(unique = true)
     public String mail;

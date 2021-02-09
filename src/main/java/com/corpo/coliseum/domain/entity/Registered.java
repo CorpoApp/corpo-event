@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Registered extends PanacheEntityBase implements Serializable {
 
+    private static final long serialVersionUID = 42L;
+
     @ManyToOne
     @Id
     public Event event;
