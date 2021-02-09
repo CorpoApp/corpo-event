@@ -2,7 +2,9 @@ package com.corpo.coliseum.domain.service;
 
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
+import com.corpo.coliseum.domain.service.configuration.PostgresResource;
 import io.quarkus.panache.mock.PanacheMock;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
+@QuarkusTestResource(PostgresResource.class)
 public class CorporationServiceTest {
 
     @Inject

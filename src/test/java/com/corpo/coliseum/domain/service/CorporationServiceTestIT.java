@@ -2,19 +2,17 @@ package com.corpo.coliseum.domain.service;
 
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
+import com.corpo.coliseum.domain.service.configuration.PostgresResource;
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import javax.inject.Inject;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@Testcontainers
 @QuarkusTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@QuarkusTestResource(PostgresResource.class)
 public class CorporationServiceTestIT {
 
    @Inject

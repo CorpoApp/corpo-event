@@ -1,14 +1,10 @@
 package com.corpo.coliseum.domain.service.impl;
 
+import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import com.corpo.coliseum.domain.service.UserService;
-import com.corpo.coliseum.api.dto.UserDTO;
-import com.corpo.coliseum.api.mapper.exception.UserException;
-import com.corpo.coliseum.domain.entity.User;
-import org.modelmapper.ModelMapper;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @ApplicationScoped

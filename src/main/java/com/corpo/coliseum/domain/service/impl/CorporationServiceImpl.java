@@ -1,6 +1,5 @@
 package com.corpo.coliseum.domain.service.impl;
 
-import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
