@@ -18,7 +18,7 @@
     <quarkus.platform.version>1.11.1.Final</quarkus.platform.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
     <lombok-plugin.version>1.18.18</lombok-plugin.version>
-    <modelmapper.version>2.3.8</modelmapper.version>
+    <modelmapper.version>2.3.9</modelmapper.version>
     <test.container.version>1.15.1</test.container.version>
     <jacoco.version>0.8.4</jacoco.version>
   </properties>
