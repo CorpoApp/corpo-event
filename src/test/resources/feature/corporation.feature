@@ -40,7 +40,8 @@ Feature: corporation
     And param name = "corpoTest"
     When method GET
     Then status 200
-    And match response == {"userList":[{"mail":"test@test.com","name":"test","@id":2}],"name":"corpoTest","@id":1,"sport":"kitesurf"}
+    And match response.name == "corpoTest"
+    And match response.userList[0].mail == "test@test.com"
 
   Scenario: delete our awesome corpo
     Given path 'corporation'

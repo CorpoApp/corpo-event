@@ -31,9 +31,6 @@ class CorporationServiceTest {
     @InjectMock
     UserService userService;
 
-    @InjectMock
-    UserService userService;
-
     @Inject
     CorporationService corporationService;
 

@@ -1,6 +1,5 @@
 package com.corpo.coliseum.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
@@ -13,7 +12,6 @@ public class UserDTO {
 
     private String mail;
     private String name;
-    @JsonBackReference
     private List<CorporationDTO> corporationList;
 
 }
