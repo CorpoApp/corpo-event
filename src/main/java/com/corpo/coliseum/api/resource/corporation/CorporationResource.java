@@ -1,4 +1,4 @@
-package com.corpo.coliseum.api.resource;
+package com.corpo.coliseum.api.resource.corporation;
 
 import com.corpo.coliseum.api.dto.CorporationDTO;
 import com.corpo.coliseum.api.mapper.exception.UserException;
@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -66,11 +67,10 @@ public class CorporationResource {
         return Response.noContent().build();
     }
 
-    @GET
+    @PATCH
     @Path("/register")
-    public Response register(@QueryParam("corporationName") String corporationName,
-                             @QueryParam("userMail") String userMail) throws ModelNotFoundException, UserException {
-        corporationService.register(corporationName, userMail);
+    public Response register(@Valid RegisterUserToCorportationInput registerUserToCorportationInput) throws ModelNotFoundException, UserException {
+        corporationService.register(registerUserToCorportationInput);
         return Response.ok().build();
     }
 }

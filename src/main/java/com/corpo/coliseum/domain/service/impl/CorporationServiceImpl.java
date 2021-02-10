@@ -1,5 +1,6 @@
 package com.corpo.coliseum.domain.service.impl;
 
+import com.corpo.coliseum.api.resource.corporation.RegisterUserToCorportationInput;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
@@ -50,9 +51,9 @@ public class CorporationServiceImpl implements CorporationService {
 
     @Override
     @Transactional
-    public void register(String corporationName, String mail) throws ModelNotFoundException {
-        final Corporation corporation = findByName(corporationName);
-        final User user = userService.findByMail(mail);
+    public void register(RegisterUserToCorportationInput registerUserToCorportationInput) throws ModelNotFoundException {
+        final Corporation corporation = findByName(registerUserToCorportationInput.getCorporationName());
+        final User user = userService.findByMail(registerUserToCorportationInput.getUserMail());
         corporation.userList.add(user);
         user.corporationList.add(corporation);
         corporation.persist();

@@ -1,6 +1,7 @@
 package com.corpo.coliseum.domain.service;
 
 import com.corpo.coliseum.api.mapper.exception.UserException;
+import com.corpo.coliseum.api.resource.corporation.RegisterUserToCorportationInput;
 import com.corpo.coliseum.domain.entity.Corporation;
 import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
@@ -25,7 +26,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresResource.class)
-public class CorporationServiceTest {
+class CorporationServiceTest {
+
+    @InjectMock
+    UserService userService;
 
     @InjectMock
     UserService userService;
@@ -59,7 +63,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void getAll_should_return_empty_list() {
+    void getAll_should_return_empty_list() {
         //Arrange
         Mockito.when(Corporation.listAll()).thenReturn(Collections.emptyList());
 
@@ -71,7 +75,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void getAll_should_return_list() {
+    void getAll_should_return_list() {
         //Arrange
         Mockito.when(Corporation.listAll())
                 .thenReturn(Arrays.asList(FIRST_CORPORATION, SECOND_CORPORATION,THIRD_CORPORATION));
@@ -84,7 +88,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void findByName_should_Throw_Exception() {
+    void findByName_should_Throw_Exception() {
         //Arrange
         Mockito.when(Corporation.findByName("Corporation"))
                 .thenReturn(Optional.empty());
@@ -95,7 +99,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void findByName_should_return_First_Corporation() throws ModelNotFoundException {
+    void findByName_should_return_First_Corporation() throws ModelNotFoundException {
         //Arrange
         Mockito.when(Corporation.findByName("Corporation 1"))
                 .thenReturn(Optional.of(FIRST_CORPORATION));
@@ -108,7 +112,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void create_should_be_ok() {
+    void create_should_be_ok() {
         //Arrange
         Corporation testCorporation = Mockito.mock(Corporation.class);
         testCorporation.name = "Corporation 1";
@@ -123,7 +127,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void create_with_invalid_corporation_should_fail() {
+    void create_with_invalid_corporation_should_fail() {
         //Arrange
         Corporation testCorporation = Mockito.mock(Corporation.class);
         testCorporation.name = "Corporation 1";
@@ -136,7 +140,7 @@ public class CorporationServiceTest {
     }
 
     @Test
-    public void register_with_null() throws ModelNotFoundException, UserException {
+    void register_with_null() throws ModelNotFoundException, UserException {
         //Arrange
         Corporation testCorporation = Mockito.mock(Corporation.class);
         testCorporation.name = "Corporation 4";
@@ -154,7 +158,7 @@ public class CorporationServiceTest {
                 .thenReturn(userTest);
 
         //Act / Assert
-        corporationService.register("Corporation 4", "test@mail.com");
+        corporationService.register(new RegisterUserToCorportationInput("Corporation 4", "test@mail.com"));
         Mockito.verify(testCorporation, Mockito.times(1)).persist();
         Mockito.verify(userTest, Mockito.times(1)).persist();
 
