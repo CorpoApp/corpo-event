@@ -1,51 +1,61 @@
 package com.corpo.coliseum.domain.service;
 
+import com.corpo.coliseum.api.mapper.exception.UserException;
 import com.corpo.coliseum.domain.entity.Corporation;
+import com.corpo.coliseum.domain.entity.User;
 import com.corpo.coliseum.domain.exception.ModelNotFoundException;
 import com.corpo.coliseum.domain.service.configuration.PostgresResource;
 import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.mockito.InjectMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
 import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @QuarkusTest
 @QuarkusTestResource(PostgresResource.class)
 public class CorporationServiceTest {
 
+    @InjectMock
+    UserService userService;
+
     @Inject
     CorporationService corporationService;
 
-    @Spy
     private static final Corporation FIRST_CORPORATION = Corporation
             .builder()
             .name("Corporation 1")
             .sport("Sport 1")
+            .userList(new HashSet<>())
             .build();
     private static final Corporation SECOND_CORPORATION = Corporation
             .builder()
             .name("Corporation 2")
             .sport("Sport 2")
+            .userList(new HashSet<>())
             .build();
     private static final Corporation THIRD_CORPORATION = Corporation
             .builder()
             .name("Corporation 3")
             .sport("Sport 3")
+            .userList(new HashSet<>())
             .build();
 
     @BeforeEach
     public void setUp() {
         PanacheMock.mock(Corporation.class);
+        PanacheMock.mock(User.class);
     }
 
     @Test
@@ -123,6 +133,31 @@ public class CorporationServiceTest {
 
         //Assert
         assertEquals(testCorporation, corporation);
+    }
+
+    @Test
+    public void register_with_null() throws ModelNotFoundException, UserException {
+        //Arrange
+        Corporation testCorporation = Mockito.mock(Corporation.class);
+        testCorporation.name = "Corporation 4";
+        testCorporation.sport = "sport 4";
+        testCorporation.userList = new HashSet<>();
+
+        User userTest = Mockito.mock(User.class);
+        userTest.name = "test";
+        userTest.mail = "test@mail.com";
+        userTest.corporationList = new HashSet<>();
+
+        Mockito.when(Corporation.findByName("Corporation 4"))
+                .thenReturn(Optional.of(testCorporation));
+        Mockito.when(userService.findByMail("test@mail.com"))
+                .thenReturn(userTest);
+
+        //Act / Assert
+        corporationService.register("Corporation 4", "test@mail.com");
+        Mockito.verify(testCorporation, Mockito.times(1)).persist();
+        Mockito.verify(userTest, Mockito.times(1)).persist();
+
     }
 
 }

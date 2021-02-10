@@ -15,20 +15,22 @@ import java.util.List;
 @ApplicationScoped
 public class CorporationServiceImpl implements CorporationService {
 
+    private final UserService userService;
+
     @Inject
-    UserService userService;
+    public CorporationServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public List<Corporation> getAll() {
-        final List<Corporation> allCorporations = Corporation.listAll();
-        return allCorporations;
+        return Corporation.listAll();
     }
 
     @Override
     public Corporation findByName(String name) throws ModelNotFoundException {
-        final Corporation corporation = Corporation.findByName(name)
+        return Corporation.findByName(name)
                 .orElseThrow(() -> new ModelNotFoundException("Corporation not found !", Corporation.class));
-        return corporation;
     }
 
     @Override
@@ -47,6 +49,7 @@ public class CorporationServiceImpl implements CorporationService {
     }
 
     @Override
+    @Transactional
     public void register(String corporationName, String mail) throws ModelNotFoundException {
         final Corporation corporation = findByName(corporationName);
         final User user = userService.findByMail(mail);
