@@ -20,7 +20,7 @@
     <lombok-plugin.version>1.18.18</lombok-plugin.version>
     <modelmapper.version>2.3.9</modelmapper.version>
     <test.container.version>1.15.1</test.container.version>
-    <jacoco.version>0.8.4</jacoco.version>
+    <jacoco.version>0.8.6</jacoco.version>
   </properties>
   <dependencyManagement>
     <dependencies>
