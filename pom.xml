@@ -19,7 +19,7 @@
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
     <lombok-plugin.version>1.18.18</lombok-plugin.version>
     <modelmapper.version>2.3.9</modelmapper.version>
-    <test.container.version>1.15.1</test.container.version>
+    <test.container.version>1.15.2</test.container.version>
     <jacoco.version>0.8.6</jacoco.version>
   </properties>
   <dependencyManagement>
