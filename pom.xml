@@ -21,6 +21,7 @@
     <modelmapper.version>2.3.9</modelmapper.version>
     <test.container.version>1.15.2</test.container.version>
     <jacoco.version>0.8.6</jacoco.version>
+    <karate.version>0.9.6</karate.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -88,13 +89,13 @@
     <dependency>
       <groupId>com.intuit.karate</groupId>
       <artifactId>karate-apache</artifactId>
-      <version>0.9.5</version>
+      <version>${karate.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.intuit.karate</groupId>
       <artifactId>karate-junit5</artifactId>
-      <version>0.9.5</version>
+      <version>${karate.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
